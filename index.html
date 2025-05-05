@@ -4,8 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Taylor Swift Reputation album website">
-    <title>reputation | Taylor Swift</title>
+    <title>reputation - Taylor Swift</title>
     <style>
+        @font-face {
+            font-family: 'Engravers Old English';
+            src: url("fonts/OPTIEngraversOldEnglish.otf") format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
         /* CSS Variables for consistent theming */
         :root {
             --header-bg: #ffffff;
@@ -90,10 +96,21 @@
             text-align: center;
         }
 
-        .album-cover {
+        .album-covera {
             width: 45%;
             height: auto;
             border-radius: 8px;
+        }
+
+        .album-cover {
+            width: 50%;
+            height: auto;
+            border-radius: 8px;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            max-height: 83%; /* o el tamaño que quieras */
+            object-fit: contain;
         }
 
         .btn {
@@ -103,7 +120,8 @@
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 1rem;
+            font-size: 1.5rem;
+            font-weight: bold;
             transition: transform 0.2s ease, opacity 0.2s ease;
         }
 
@@ -184,8 +202,10 @@
         }
         
         .album-intro h2 {
+            font-family: 'Engravers Old English', serif;
             color: #ffffff;
-            font-size: 2rem;
+            font-size: 3rem;
+            font-weight: normal;
             margin-bottom: 1rem;
         }
         
@@ -213,19 +233,28 @@
             position: relative;
             padding: 4rem 5%;
             background: 
-                linear-gradient(to bottom, #000 0%, transparent 10%),
-                linear-gradient(to top, #000 0%, transparent 10%),
-                url("images/rep snakes background.png") repeat;
+                linear-gradient(to bottom, #000 0%, transparent 15%),
+                linear-gradient(to top, #000 0%, transparent 15%),
+                url("https://imgur.com/WPIqcF9.png") center/cover no-repeat fixed;
             color: white;
             text-align: center;
             overflow: hidden;
+            min-height: 100vh; /* Ensures section is tall enough */
+        }
+
+        /* Add this to make sure content is visible over the background */
+        .singles-grid {
+            position: relative;
+            z-index: 2;
         }
         
         .section-title {
-            font-size: 2.5rem;
+            font-family: 'Engravers Old English', serif;
+            font-size: 3.5rem;
+            font-weight: normal;
             margin-bottom: 3rem;
+            margin-top: 1.5rem;
             color: #000000;
-            text-transform: uppercase;
             letter-spacing: 2px;
         }
         
@@ -243,7 +272,7 @@
             padding: 20px;
             transition: transform 0.3s ease;
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.5);
         }
         
         .single-card:hover {
@@ -296,6 +325,178 @@
             .single-card {
                 width: 80%;
                 max-width: 300px;
+            }
+        }
+
+            /* Songlist Section Styles */
+        .songlist-section {
+            background-color: #000;
+            color: #fff;
+            padding: 4rem 5%;
+            text-align: center;
+        }
+        
+        .songlist-container {
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .songlist-column {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+        }
+        
+        .songlist-item {
+            background: rgba(0, 0, 0, 0);
+            border-radius: 10px;
+            overflow: hidden;
+            height: 100%;
+            transition: transform 0.3s ease;
+        }
+        
+        .songlist-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .songlist-image {
+            width: 20%;
+            height: auto;
+            object-fit: cover;
+        }
+        
+        .songlist-songs {
+            padding: 1.5rem;
+            text-align: center;
+        }
+        
+        .songlist-songs ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .songlist-songs li {
+            padding: 4% 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 150%;
+        }
+        
+        .songlist-songs li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Tour Section Styles */
+        .tour-section {
+            background: linear-gradient(180deg,rgba(0, 0, 0, 1) 4%, rgba(154, 26, 26, 1) 100%);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            color: white;
+            padding: 6rem 5% 0 5%;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tour-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center; /* Aligns items to bottom */
+            max-width: 1200px;
+            margin: 0 auto;
+            gap: 2rem;
+        }
+        
+        .tour-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+            flex: 0.7;
+        }
+        
+        .stat-item {
+            text-align: right;
+        }
+        
+        .tour-stats:last-child .stat-item {
+            text-align: left;
+        }
+        
+        .big-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-top: 0.5rem;
+            color: #fff;
+        }
+        
+        .tour-image {
+            flex: 1;
+            max-width: 400px;
+            align-self: flex-end; /* Aligns image to bottom */
+        }
+        
+        .tour-image img {
+            position:relative;
+            bottom: -6.5px;
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        
+        .tour-title {
+            text-align: center;
+            margin-top: 3rem;
+        }
+        
+        .tour-title h2 {
+            font-family: 'Engravers Old English', serif;
+            font-weight: normal;
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            text-transform: capitalize;
+        }
+        
+        .tour-title p {
+            font-size: 1.2rem;
+            letter-spacing: 3px;
+        }
+        
+        @media (max-width: 768px) {
+            .tour-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tour-stats {
+                width: 100%;
+                flex-direction: row;
+                justify-content: space-between;
+                gap: 1rem;
+            }
+            
+            .stat-item {
+                text-align: center !important;
+            }
+            
+            .tour-image {
+                order: -1;
+                margin-bottom: 2rem;
+                max-width: 300px;
+            }
+            
+            .tour-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .songlist-column {
+                min-width: 100%;
+            }
+            
+            .songlist-image {
+                height: 250px;
             }
         }
 
@@ -384,6 +585,77 @@
             transform: translateX(-10px);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
+
+        /* Footer Styles */
+    .swift-footer {
+        background: linear-gradient(to right, #000000, #1a1a1a);
+        color: white;
+        padding: 3rem 0;
+        text-align: center;
+    }
+    
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+    
+    .swift-footer h3 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        color: #871414;
+    }
+    
+    .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 25px;
+        flex-wrap: wrap;
+        margin-bottom: 2rem;
+    }
+    
+    .social-icon {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 50%;
+        transition: all 0.3s ease;
+    }
+    
+    .social-icon:hover {
+        transform: translateY(-5px);
+        background: rgba(0, 0, 0, 0.3);
+    }
+    
+    .social-icon img {
+        width: 30px;
+        height: 30px;
+        filter: brightness(1) ;
+    }
+    
+    .copyright {
+        opacity: 0.7;
+        font-size: 0.9rem;
+    }
+    
+    @media (max-width: 768px) {
+        .social-links {
+            gap: 15px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+        }
+        
+        .social-icon img {
+            width: 25px;
+            height: 25px;
+        }
+    }
     </style>
 </head>
 <body>
@@ -391,10 +663,11 @@
         <h1 class="header-title">TAYLOR SWIFT</h1>
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#home">Inicio</a></li>
+                <li><a href="#Acerca De">Acerca De</a></li>
+                <li><a href="#Sencillos">Sencillos</a></li>
+                <li><a href="#Canciones">Canciones</a></li>
+                <li><a href="#Tour">Tour</a></li>
             </ul>
         </nav>
     </header>
@@ -402,48 +675,142 @@
     <main>
         <section class="hero" id="home">
             <div class="hero-content">
-                <img src="images/rep_font.png" alt="Reputation Album Logo" class="album-cover" style="width: 65%; height: auto;">
-                <p>El nuevo álbum</p>
-                <button class="btn">ORDENA AHORA</button>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Reputation_Logo.svg/1000px-Reputation_Logo.svg.png" alt="Reputation Album Logo" class="album-covera" style="width: 65%; height: auto;">
+                <p style="font-size: 25px;">El nuevo álbum</p>
+                <button onclick="window.open('https://udiscovermusic.co/products/cd-taylor-swift-reputation-importado?srsltid=AfmBOoq2xEYA7zp6tbhxzhkFkJrVV_5PH9v9DaaRVwkOh1hsE-uOO0Cz','_blank')" class="btn">ORDENA AHORA</button>
             </div>
-            <img src="images/reputation cover clean.png" alt="Reputation Album Cover" class="album-cover">
+            <img src="https://imgur.com/0oS2kAB.png" alt="Reputation Album Cover" class="album-cover">
         </section>
         
-        <section class="album-intro" id="album-intro">
-            <img src="images/reputation intro.png" alt="Taylor Swift Reputation Album" class="album-intro-image">
+        <section class="album-intro" id="Acerca De">
+            <img src="https://imgur.com/7kErpUL.png" alt="Taylor Swift Reputation Album" class="album-intro-image">
             <div class="album-intro-content">
-                <h2>THE REPUTATION ERA</h2>
-                <p>Reputation is Taylor Swift's sixth studio album, marking a dramatic transformation in her musical style and public persona. Released on November 10, 2017, the album represents Swift's response to media scrutiny and her journey of self-discovery during a period of intense public attention.</p>
-                <p>With its darker tones and edgier production, Reputation explores themes of love found in the midst of chaos, the power of reputation, and the importance of trusting only those who truly know you. The album debuted at #1 on the Billboard 200 and spawned hit singles like "Look What You Made Me Do" and "Delicate."</p>
+                <h2>La Era "reputation"</h2>
+                <p>Reputation es el sexto álbum de estudio de Taylor Swift, que marca una transformación radical en su estilo musical y su imagen pública. Lanzado el 10 de noviembre de 2017, el álbum representa la respuesta de Swift al escrutinio mediático y su viaje de autodescubrimiento durante un período de intensa atención pública.</p>
+                <p>Con sus tonos más oscuros y una producción más atrevida, Reputation explora temas como el amor encontrado en medio del caos, el poder de la reputación y la importancia de confiar solo en quienes realmente te conocen. El álbum debutó en el número 1 del Billboard 200 y generó sencillos de éxito como "Look What You Made Me Do" y "Delicate".</p>
             </div>
         </section>
 
-        <section class="singles-section" id="singles">
-            <h2 class="section-title">Main Singles</h2>
+        <section class="singles-section" id="Sencillos">
+            <h2 class="section-title">Sencillos Principales</h2>
             <div class="singles-grid">
                 <div class="single-card">
-                    <img src="images/ready for it single cover.png" alt="...Ready For It? Cover" class="single-cover">
+                    <img src="https://imgur.com/QDVWIzU.png" alt="...Ready For It? Cover" class="single-cover">
                     <h3 class="single-title">...Ready For It?</h3>
                 </div>
                 <div class="single-card">
-                    <img src="images/\lwymd single cover.png" alt="Look What You Made Me Do Cover" class="single-cover">
+                    <img src="https://imgur.com/8z1bD6N.png" alt="Look What You Made Me Do Cover" class="single-cover">
                     <h3 class="single-title">Look What You Made Me Do</h3>
                     
                 </div>
                 <div class="single-card">
-                    <img src="images/end game single cover.png" alt="End Game Cover" class="single-cover">
+                    <img src="https://imgur.com/kS7rN0y.png" alt="End Game Cover" class="single-cover">
                     <h3 class="single-title">End Game</h3>
                 </div>
             </div>
         </section>
 
-        <section class="about" id="about">
-            <h2>About The Album</h2>
-            <p>Reputation is Taylor Swift's sixth studio album, released in 2017.</p>
+        <section class="songlist-section" id="Canciones">
+            <h2 class="section-title"style="color:white;">Lista de Canciones</h2>
+            <div class="songlist-container">
+                <!-- Left Column -->
+                <div class="songlist-column">
+                    <div class="songlist-item">
+                        
+                        <div class="songlist-songs">
+                            <ul>
+                                <li>...Ready For It?</li>
+                                <li>End Game</li>
+                                <li>I Did Something Bad</li>
+                                <li>Don't Blame Me</li>
+                                <li>Delicate</li>
+                                <li>Look What You Made Me Do</li>
+                                <li>So It Goes...</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <img src="https://imgur.com/2LS8DyD.png" alt="Reputation Album Art" class="songlist-image">
+                <!-- Right Column -->
+                <div class="songlist-column">
+                    <div class="songlist-item">
+                        <div class="songlist-songs">
+                            <ul>
+                                <li>Dancing With Our Hands Tied</li>
+                                <li>Gorgeous</li>
+                                <li>Getaway Car</li>
+                                <li>King of My Heart</li>
+                                <li>Dress</li>
+                                <li>This Is Why We Can't Have Nice Things</li>
+                                <li>Call It What You Want</li>
+                                <li>New Year's Day</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-        
-        <!-- More sections can be added here -->
+
+        <section class="tour-section" id="Tour">
+            <div class="tour-title">
+                <h2>Reputation stadium tour</h2>
+                <p>53 FECHAS INOLVIDABLES</p>
+            </div>
+            <div class="tour-container">
+                <!-- Left Column - Tour Stats -->
+                <div class="tour-stats">
+                    <div class="stat-item">
+                        <h3>Asistentes</h3>
+                        <p class="big-number">2,888,892</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>Inicio</h3>
+                        <p>Glendale<br>8 de mayo de 2018</p>
+                    </div>
+                </div>
+                
+                <!-- Middle Column - Taylor Image -->
+                <div class="tour-image">
+                    <img src="https://imgur.com/JOiVwmH.png" alt="Taylor Swift on reputation Tour">
+                </div>
+                
+                <!-- Right Column - Tour Stats -->
+                <div class="tour-stats">
+                    <div class="stat-item">
+                        <h3>Recaudo total</h3>
+                        <p class="big-number">$345.7M</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>Final</h3>
+                        <p>Tokio<br>21 de noviembre de 2018</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+    <footer class="swift-footer">
+        <div class="footer-content">
+            <h3>Connect With Taylor</h3>
+            <div class="social-links">
+                <a href="https://www.instagram.com/taylorswift" target="_blank" class="social-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram">
+                </a>
+                <a href="https://twitter.com/taylorswift13" target="_blank" class="social-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter">
+                </a>
+                <a href="https://www.facebook.com/TaylorSwift" target="_blank" class="social-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook">
+                </a>
+                <a href="https://www.tiktok.com/@taylorswift" target="_blank" class="social-icon">
+                    <img src="https://cdn4.iconfinder.com/data/icons/social-media-flat-7/64/Social-media_Tiktok-512.png" alt="TikTok">
+                </a>
+                <a href="https://www.youtube.com/taylorswift" target="_blank" class="social-icon">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/e/ef/Youtube_logo.png" alt="YouTube">
+                </a>
+            </div>
+            <p class="copyright">© 2023 Taylor Swift. All rights reserved.</p>
+        </div>
+    </footer>
     <div class="music-container" id="musicContainer">
         <div class="music-player">
             <div class="song-info">
@@ -457,8 +824,7 @@
         </div>
         <button class="minimized-toggle" id="toggleButton">♫</button>
         <audio id="backgroundMusic" loop>
-            <source src="images/King Of My Heart.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
+            <source src="images\King Of My Heart.mp3" type="audio/mpeg">
         </audio>
     </div>
     <script>
