@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Taylor Swift Reputation album website">
+    <title>reputation | Taylor Swift</title>
+    <style>
+        /* CSS Variables for consistent theming */
+        :root {
+            --header-bg: #ffffff;
+            --text-dark: #000000;
+            --accent-color: #4CAF50;
+            --header-height: 70px;
+            --button-bg: #000000;
+            --button-text: #ffffff;
+        }
+
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        /* Fixed header styles */
+        header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: var(--header-bg);
+            padding: 15px 5%;
+            z-index: 1000;
+        }
+
+        .header-title {
+            margin: 0;
+            font-size: 1.5rem;
+        }
+        
+        /* Navigation menu styles */
+        nav ul {
+            list-style: none;
+            display: flex;
+            gap: 1.5rem;
+        }
+        
+        nav a {
+            color: var(--text-dark);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* Main content styles */
+        main {
+            padding-top: var(--header-height);
+        }
+
+        /* Hero section styles */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 5%;
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            max-width: 50%;
+            text-align: center;
+        }
+
+        .album-cover {
+            width: 45%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .btn {
+            background-color: var(--button-bg);
+            color: var(--button-text);
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: transform 0.2s ease, opacity 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+
+        /* About section styles */
+        .about {
+            padding: 4rem 5%;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                gap: 1rem;
+            }
+
+            .hero {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .hero-content, .album-cover {
+                max-width: 100%;
+                width: 100%;
+            }
+        }
+        /* Music player styles */
+        .music-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        /* Minimized state */
+        .music-container.minimized {
+            transform: translateX(calc(100% - 50px));
+        }
+        
+        .music-container.minimized .music-player {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Album Intro Section */
+        .album-intro {
+            background-color: #000;
+            color: #fff;
+            padding: 4rem 5% 4rem 8%;
+            display: flex;
+            align-items: center;
+            gap: 15%;
+        }
+        
+        .album-intro-image {
+            flex: 1;
+            width: 60%; /* Adjust this percentage to make it smaller/larger */
+            max-width: 450px; /* Sets maximum size */
+            min-width: 250px; /* Sets minimum size */
+            border-radius: 8px;
+        }
+        
+        .album-intro-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .album-intro h2 {
+            color: #ffffff;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .album-intro p {
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .album-intro {
+                flex-direction: column;
+                padding: 3rem 5%;
+            }
+            
+            .album-intro-image {
+                width: 100%;
+                max-width: 400px;
+                min-width: auto;
+                margin-bottom: 2rem;
+            }
+        }
+        
+        .singles-section {
+            position: relative;
+            padding: 4rem 5%;
+            background: 
+                linear-gradient(to bottom, #000 0%, transparent 10%),
+                linear-gradient(to top, #000 0%, transparent 10%),
+                url("images/rep snakes background.png") repeat;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #000000;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        
+        .singles-grid {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .single-card {
+            width: 280px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .single-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .single-cover {
+            width: 100%;
+            border-radius: 5px;
+            aspect-ratio: 1;
+            object-fit: cover;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .single-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        /* Gradient edges */
+        .singles-section::before,
+        .singles-section::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 50px;
+            background: linear-gradient(to bottom, #000, transparent);
+            z-index: 1;
+        }
+        
+        .singles-section::before {
+            top: 0;
+        }
+        
+        .singles-section::after {
+            bottom: 0;
+            background: linear-gradient(to top, #000, transparent);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .singles-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .single-card {
+                width: 80%;
+                max-width: 300px;
+            }
+        }
+
+        /* Music player styles */
+        .music-player {
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: opacity 0.3s ease;
+        }
+        
+        .song-info {
+            display: flex;
+            flex-direction: column;
+            min-width: 120px;
+        }
+        
+        .song-title {
+            font-weight: bold;
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        
+        .song-artist {
+            font-size: 12px;
+            opacity: 0.8;
+        }
+        
+        .player-controls {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .play-btn, .minimize-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            font-size: 14px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .minimize-btn {
+            background-color: rgba(255,255,255,0.2);
+            margin-left: auto;
+        }
+        
+        .play-btn:hover, .minimize-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Minimized toggle button */
+        .minimized-toggle {
+            position: absolute;
+            left: 0;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: -1;
+            transition: all 0.3s ease;
+        }
+        
+        .music-container.minimized .minimized-toggle {
+            transform: translateX(-10px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="header-title">TAYLOR SWIFT</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <main>
+        <section class="hero" id="home">
+            <div class="hero-content">
+                <img src="images/rep_font.png" alt="Reputation Album Logo" class="album-cover" style="width: 65%; height: auto;">
+                <p>El nuevo álbum</p>
+                <button class="btn">ORDENA AHORA</button>
+            </div>
+            <img src="images/reputation cover clean.png" alt="Reputation Album Cover" class="album-cover">
+        </section>
+        
+        <section class="album-intro" id="album-intro">
+            <img src="images/reputation intro.png" alt="Taylor Swift Reputation Album" class="album-intro-image">
+            <div class="album-intro-content">
+                <h2>THE REPUTATION ERA</h2>
+                <p>Reputation is Taylor Swift's sixth studio album, marking a dramatic transformation in her musical style and public persona. Released on November 10, 2017, the album represents Swift's response to media scrutiny and her journey of self-discovery during a period of intense public attention.</p>
+                <p>With its darker tones and edgier production, Reputation explores themes of love found in the midst of chaos, the power of reputation, and the importance of trusting only those who truly know you. The album debuted at #1 on the Billboard 200 and spawned hit singles like "Look What You Made Me Do" and "Delicate."</p>
+            </div>
+        </section>
+
+        <section class="singles-section" id="singles">
+            <h2 class="section-title">Main Singles</h2>
+            <div class="singles-grid">
+                <div class="single-card">
+                    <img src="images/ready for it single cover.png" alt="...Ready For It? Cover" class="single-cover">
+                    <h3 class="single-title">...Ready For It?</h3>
+                </div>
+                <div class="single-card">
+                    <img src="images/\lwymd single cover.png" alt="Look What You Made Me Do Cover" class="single-cover">
+                    <h3 class="single-title">Look What You Made Me Do</h3>
+                    
+                </div>
+                <div class="single-card">
+                    <img src="images/end game single cover.png" alt="End Game Cover" class="single-cover">
+                    <h3 class="single-title">End Game</h3>
+                </div>
+            </div>
+        </section>
+
+        <section class="about" id="about">
+            <h2>About The Album</h2>
+            <p>Reputation is Taylor Swift's sixth studio album, released in 2017.</p>
+        </section>
+        
+        <!-- More sections can be added here -->
+    </main>
+    <div class="music-container" id="musicContainer">
+        <div class="music-player">
+            <div class="song-info">
+                <span class="song-title">King Of My Heart</span>
+                <span class="song-artist">Taylor Swift</span>
+            </div>
+            <div class="player-controls">
+                <button class="play-btn" id="playButton">▶</button>
+                <button class="minimize-btn" id="minimizeButton">−</button>
+            </div>
+        </div>
+        <button class="minimized-toggle" id="toggleButton">♫</button>
+        <audio id="backgroundMusic" loop>
+            <source src="images/King Of My Heart.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+    </div>
+    <script>
+        const audioPlayer = document.getElementById('backgroundMusic');
+        const playButton = document.getElementById('playButton');
+        const minimizeButton = document.getElementById('minimizeButton');
+        const toggleButton = document.getElementById('toggleButton');
+        const musicContainer = document.getElementById('musicContainer');
+        let isPlaying = false;
+        let isMinimized = false;
+
+        // Play/pause functionality
+        playButton.addEventListener('click', function() {
+            if (isPlaying) {
+                audioPlayer.pause();
+                playButton.textContent = '▶';
+            } else {
+                audioPlayer.play();
+                playButton.textContent = '❚❚';
+            }
+            isPlaying = !isPlaying;
+        });
+
+        // Minimize/expand functionality
+        minimizeButton.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleMinimize();
+        });
+
+        toggleButton.addEventListener('click', function() {
+            toggleMinimize();
+        });
+
+        function toggleMinimize() {
+            isMinimized = !isMinimized;
+            musicContainer.classList.toggle('minimized', isMinimized);
+            toggleButton.textContent = isMinimized ? '♫' : '×';
+        }
+
+        // Optional: Change button when audio ends
+        audioPlayer.addEventListener('ended', function() {
+            playButton.textContent = '▶';
+            isPlaying = false;
+        });
+    </script>
+</body>
+</html>
